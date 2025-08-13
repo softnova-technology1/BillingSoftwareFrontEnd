@@ -1,0 +1,25 @@
+.footerConatiner {
+  max-width: 1000px;
+  margin: 4rem auto;
+}
+.flexConatiner {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+  align-items: center;
+  justify-content: center;
+}
+.linkstyle {
+  font-size: 1.7rem;
+  font-family: "Aldrich", sans-serif;
+}
+.linkstyle a {
+  color: #8392ab;
+}
+.linkstyle a:hover {
+  color: #343a64;
+}
+.copyRight {
+  color: #8392ab;
+  font-size: 1.5rem;
+}
