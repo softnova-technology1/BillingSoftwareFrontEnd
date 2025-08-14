@@ -54,5 +54,33 @@
   background: linear-gradient(90deg, #3a416f, #141727);
   font-size: 1.5rem;
 }
-.formContainer {
+.errorMsg {
+  font-size: 1.3rem;
+  color: red;
+  margin-top: 0.5rem;
+}
+@media (max-width: 820px) {
+  .outerContainer {
+    padding: 2rem;
+  }
+
+  .formOuterGrid {
+    max-width: 600px;
+    margin: -12% auto 0 auto;
+  }
+}
+@media (max-width: 600px) {
+  .formOuterGrid {
+    max-width: 400px;
+    margin: -20% auto 0 auto;
+  }
+}
+@media (max-width: 400px) {
+  .content {
+    width: 100%;
+  }
+  .formOuterGrid {
+    max-width: 300px;
+    margin: -30% auto 0 auto;
+  }
 }

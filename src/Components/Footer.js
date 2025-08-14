@@ -5,48 +5,48 @@ import { Facebook, WhatsApp, Instagram } from "@mui/icons-material";
 export default function Footer() {
   return (
     <Grid container className={`${classes.footerConatiner}`} spacing={2}>
-      <Grid size={{ md: 12 }}>
+      <Grid size={{ xs: 12, sm: 12, md: 12 }}>
         <div className={`${classes.flexConatiner}`}>
           <div className={`${classes.linkstyle}`}>
-            <Link>Company</Link>
+            <Link to="#">Company</Link>
           </div>
           <div className={`${classes.linkstyle}`}>
-            <Link>About Us</Link>
+            <Link to="#">About Us</Link>
           </div>
           <div className={`${classes.linkstyle}`}>
-            <Link>Team</Link>
+            <Link to="#">Team</Link>
           </div>
           <div className={`${classes.linkstyle}`}>
-            <Link>Products</Link>
+            <Link to="#">Products</Link>
           </div>
           <div className={`${classes.linkstyle}`}>
-            <Link>Blog</Link>
+            <Link to="#">Blog</Link>
           </div>
           <div className={`${classes.linkstyle}`}>
-            <Link>Pricing</Link>
+            <Link to="#">Pricing</Link>
           </div>
         </div>
       </Grid>
-      <Grid size={{ md: 12 }}>
+      <Grid size={{ xs: 12, sm: 12, md: 12 }}>
         <div className={`${classes.flexConatiner}`}>
           <div className={`${classes.linkstyle}`}>
-            <Link>
+            <Link to="#">
               <Facebook sx={{ fontSize: 30 }} />
             </Link>
           </div>
           <div className={`${classes.linkstyle}`}>
-            <Link>
+            <Link to="#">
               <WhatsApp sx={{ fontSize: 30 }} />
             </Link>
           </div>
           <div className={`${classes.linkstyle}`}>
-            <Link>
+            <Link to="#">
               <Instagram sx={{ fontSize: 30 }} />
             </Link>
           </div>
         </div>
       </Grid>
-      <Grid size={{ md: 12 }}>
+      <Grid size={{ xs: 12, sm: 12, md: 12 }}>
         <div className={`${classes.flexConatiner}`}>
           <p className={`${classes.copyRight}`}>
             Copyright &copy; 2025 Softnova by Creators.
