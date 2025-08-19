@@ -456,7 +456,7 @@ export async function action({ request }) {
   } else {
     if (responseVal.token) {
       localStorage.setItem("token", responseVal.token);
-      redirect("/");
+      return redirect("/");
     } else {
       return "Server Error Failed to submit";
     }

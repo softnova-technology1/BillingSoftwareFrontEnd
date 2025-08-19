@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./Components/RootLayout";
 // import HeaderPage from "./Components/HeaderPage";
 import SignUp from "./Components/SignUp";
+import SignIn from "./Components/SignIn";
 import { action as signUpAction } from "./Components/SignUp";
 import "./App.css";
 export default function App() {
@@ -14,6 +15,10 @@ export default function App() {
           path: "/sign-up",
           element: <SignUp />,
           action: signUpAction,
+        },
+        {
+          path: "/sign-in",
+          element: <SignIn />,
         },
       ],
     },
