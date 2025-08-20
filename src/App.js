@@ -6,6 +6,7 @@ import SignIn from "./Components/SignIn";
 import { action as signUpAction } from "./Components/SignUp";
 import { action as customerPageAction } from "./Components/CustomerPage";
 import "./App.css";
+import DashBoard from "./Components/DashBoard";
 import CustomerPage from "./Components/CustomerPage";
 import CustomerEntry from "./Components/CustomerEntry";
 export default function App() {
@@ -20,6 +21,8 @@ export default function App() {
           action: signUpAction,
         },
         {
+          path:'/DashBoard',
+          element:<DashBoard/>,
           path: "/sign-in",
           element: <SignIn />,
         },
