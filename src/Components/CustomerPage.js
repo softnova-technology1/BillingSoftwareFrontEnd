@@ -1,6 +1,9 @@
 import { Box, Button, Grid, MenuItem, Typography } from '@mui/material'
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
+import { useNavigate } from 'react-router-dom';
 
 const CustomerPage = () => {
     const [email, setEmail] = useState("");
@@ -9,7 +12,19 @@ const CustomerPage = () => {
     const [phone, setPhone] = useState("");
     const [state, setState] = useState("");
     const [pin, setPin] = useState("");
-    const [gstin, setGstin] = useState("")
+    const [gstin, setGstin] = useState("");
+    const [errorPhone, setErrorPhone] = useState(false);
+
+    const [customerForm, setCustomerForm] = useState({
+        firstName: "",
+        lastName: "",
+        companyName: "",
+        email: "",
+        phone: "",
+        gstNumber: "",
+    })
+
+    const navigate = useNavigate("")
 
     const states = [
         "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
@@ -32,12 +47,10 @@ const CustomerPage = () => {
 
     const handleEnter = (e) => {
         const val = e.target.value;
+        if (!/^\d*$/.test(val)) return;
+        if (val.length > 10) return;
         setPhone(val)
-        const phvalid = /^\d{11}$/;
-
-        if (phvalid.test(val)) {
-            setPhone(phone)
-        }
+        setErrorPhone(val.length !== 10);
     };
 
     const handlePin = (e) => {
@@ -56,14 +69,40 @@ const CustomerPage = () => {
         setGstin(gst);
 
         const gstRegex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
-        setErrorGST(gst.length === 15 && !gstRegex.test(gst));
+
+        if (gst.length === 15) {
+            setErrorGST(!gstRegex.test(gst));
+        } else {
+            setErrorGST(true);
+        }
+    }
+
+    const handleSaveCustomer = async () => {
+        const response = await fetch(
+            `${process.env.REACT_APP_BACKEND_URL}/customers`,
+            {
+                method: "POST",
+                headers: { "content-type": "application/json" },
+            }
+
+        )
+        console.log(response);
+        navigate('/customer-entry')
+    }
+
+    const handleSaveDetails = (item, value) => {
+        setCustomerForm((prev) => {
+            return {
+                ...prev,[item]:value
+            }
+        })
     }
 
     return (
         <>
-            <div style={{ padding: '30px', fontSize: '1.2rem' }}>
+            <div style={{ padding: '30px' }}>
                 <Typography variant="h4" sx={{ py: 2 }}>New Customer</Typography>
-                <Box sx={{ flexGrow: 1 }}>
+                <Box sx={{ flexGrow: 1 }} onSubmit={handleSaveDetails}>
                     <Grid container spacing={2}>
                         <Grid size={{ xs: 6, md: 8 }} >
                             <Box sx={{ flexGrow: 1 }}>
@@ -71,7 +110,7 @@ const CustomerPage = () => {
                                     <Grid item xs={12} sm={3} md={2} sx={{ display: "flex", alignItems: "center" }}>
                                         <div style={{ display: "flex", alignItems: "center" }}>
                                             <label style={{ fontSize: "15px", fontWeight: 600, width: "120px", color: '#030b58ff' }}>
-                                                First Name
+                                                Customer Name
                                             </label>
                                         </div>
                                     </Grid>
@@ -79,8 +118,10 @@ const CustomerPage = () => {
                                         <Grid container spacing={2}>
                                             <Grid item>
                                                 <TextField
+                                                    required
                                                     label="Enter First Name"
                                                     size="small"
+                                                    value={customerForm.firstName}
                                                     sx={{
                                                         width: {
                                                             xs: "320px",
@@ -92,8 +133,9 @@ const CustomerPage = () => {
                                             </Grid>
                                             <Grid item>
                                                 <TextField
-                                                    label="Enter Last Name"
+                                                    label="Enter Last Name (optional)"
                                                     size="small"
+                                                    value={customerForm.lastName}
                                                     sx={{
                                                         width: {
                                                             xs: "320px",
@@ -121,6 +163,7 @@ const CustomerPage = () => {
                                             required
                                             id="outlined-required"
                                             label="Enter Company Name"
+                                            value={customerForm.companyName}
                                             size="small" sx={{
                                                 width: {
                                                     xs: "320px",
@@ -147,7 +190,7 @@ const CustomerPage = () => {
                                                 required
                                                 id="email"
                                                 label="Email Address"
-                                                value={email}
+                                                value={customerForm.email}
                                                 onChange={handleChange}
                                                 error={error}
                                                 helperText={error ? "Enter a valid email address" : ""}
@@ -157,6 +200,11 @@ const CustomerPage = () => {
                                                         sm: "450px",
                                                         md: "500px"
                                                     }
+                                                }}
+                                                InputProps={{
+                                                    startAdornment: (
+                                                        <EmailOutlinedIcon sx={{ color: "#030b58ff" }} />
+                                                    ),
                                                 }}
                                             />
                                         </Grid>
@@ -174,17 +222,25 @@ const CustomerPage = () => {
                                     </Grid>
                                     <Grid item xs={12} sm={9} md={10}>
                                         <TextField
+                                            type='number'
                                             required
                                             id="outlined-required"
                                             label="Enter Contact Number"
-                                            value={phone}
+                                            value={customerForm.phone}
                                             onChange={handleEnter}
+                                            error={errorPhone}
+                                            helperText={errorPhone ? "Phone number must be exactly 10 digits" : ""}
                                             size="small" sx={{
                                                 width: {
                                                     xs: "320px",
                                                     sm: "450px",
                                                     md: "500px"
                                                 }
+                                            }}
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <LocalPhoneOutlinedIcon sx={{ color: "#030b58ff" }} />
+                                                ),
                                             }}
                                         />
                                     </Grid>
@@ -203,10 +259,10 @@ const CustomerPage = () => {
                                         <TextField
                                             id="outlined-required"
                                             label="Enter GSTIN Number"
-                                            value={gstin}
+                                            value={customerForm.gstNumber}
                                             onChange={handleGST}
-                                            error={errorgst && gstin.length > 0}
-                                            helperText={errorgst && gstin.length > 0 ? "Invalid GSTIN Number" : ""}
+                                            error={errorgst}
+                                            helperText={errorgst ? "Invalid GSTIN Number" : ""}
                                             size="small" sx={{
                                                 width: {
                                                     xs: "320px",
@@ -339,7 +395,7 @@ const CustomerPage = () => {
                 </Box>
             </div>
             <div style={{ borderTop: '2px solid #e1e1e1' }}>
-                <Button variant="contained" color='success' sx={{ marginTop: '20px', marginLeft: '20px' }}>Save</Button>
+                <Button variant="contained" color='success' sx={{ marginTop: '20px', marginLeft: '20px' }} onClick={handleSaveCustomer}>Save</Button>
                 <Button variant="outlined" color='success' sx={{ marginTop: '20px', marginLeft: '20px' }}>Cancel</Button>
             </div>
         </>
