@@ -1,0 +1,47 @@
+/* Dashboard.css */
+
+/* ✅ Make cards stack neatly on mobile */
+@media (max-width: 600px) {
+  .MuiGrid-container {
+    padding: 8px !important;
+  }
+
+  .MuiCard-root {
+    margin-bottom: 12px;
+    border-radius: 16px !important;
+  }
+
+  /* ✅ Images scale properly */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* ✅ Typography adjustments */
+  .MuiTypography-h5 {
+    font-size: 1.5rem !important;
+  }
+
+  .MuiTypography-body2 {
+    font-size: 1rem !important;
+  }
+
+  /* ✅ Button scaling */
+  .MuiButton-root {
+    font-size: 1.2rem !important;
+    padding: 6px 12px !important;
+  }
+}
+
+/* ✅ Tablet view (optional) */
+@media (max-width: 900px) {
+  .MuiTypography-h5 {
+    font-size: 1.8rem !important;
+  }
+  .MuiTypography-body2 {
+    font-size: 1.2rem !important;
+  }
+  .MuiButton-root {
+    font-size: 1.4rem !important;
+  }
+}

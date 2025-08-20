@@ -4,6 +4,7 @@ import RootLayout from "./Components/RootLayout";
 import SignUp from "./Components/SignUp";
 import { action as signUpAction } from "./Components/SignUp";
 import "./App.css";
+import DashBoard from "./Components/DashBoard";
 export default function App() {
   const router = createBrowserRouter([
     {
@@ -14,6 +15,10 @@ export default function App() {
           path: "/sign-up",
           element: <SignUp />,
           action: signUpAction,
+        },
+        {
+          path:'/DashBoard',
+          element:<DashBoard/>,
         },
       ],
     },
