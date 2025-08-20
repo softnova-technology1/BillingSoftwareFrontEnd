@@ -2,9 +2,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./Components/RootLayout";
 // import HeaderPage from "./Components/HeaderPage";
 import SignUp from "./Components/SignUp";
+import SignIn from "./Components/SignIn";
 import { action as signUpAction } from "./Components/SignUp";
+import { action as customerPageAction } from "./Components/CustomerPage";
 import "./App.css";
 import DashBoard from "./Components/DashBoard";
+import CustomerPage from "./Components/CustomerPage";
 export default function App() {
   const router = createBrowserRouter([
     {
@@ -19,6 +22,13 @@ export default function App() {
         {
           path:'/DashBoard',
           element:<DashBoard/>,
+          path: "/sign-in",
+          element: <SignIn />,
+        },
+        {
+          path: "/customer-page",
+          element: <CustomerPage />,
+          action: customerPageAction,
         },
       ],
     },

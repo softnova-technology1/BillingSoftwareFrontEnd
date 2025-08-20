@@ -440,7 +440,6 @@ export default function SignUp() {
 export async function action({ request }) {
   const fd = await request.formData();
   const data = Object.fromEntries(fd.entries());
-  console.log(data);
   const response = await fetch(
     `${process.env.REACT_APP_BACKEND_URL}/users/sign-up`,
     {
@@ -450,13 +449,12 @@ export async function action({ request }) {
     }
   );
   const responseVal = await response.json();
-  console.log(responseVal);
   if (!response.ok) {
     return responseVal.message || "Server Error Failed to submit";
   } else {
     if (responseVal.token) {
       localStorage.setItem("token", responseVal.token);
-      redirect("/");
+      return redirect("/");
     } else {
       return "Server Error Failed to submit";
     }
