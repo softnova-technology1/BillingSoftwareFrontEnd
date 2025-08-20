@@ -32,7 +32,6 @@ export default function SignIn() {
   }
   async function onSubmitHandler(e) {
     e.preventDefault();
-    console.log(signIndata);
     const { email, password } = signIndata;
     if (
       !email ||
@@ -66,6 +65,7 @@ export default function SignIn() {
         msg: responseVal.message || "Server Error Failed to submit",
       });
     } else {
+      localStorage.setItem("remember", JSON.stringify(checked));
       checked
         ? localStorage.setItem("token", responseVal.token)
         : sessionStorage.setItem("token", responseVal.token);

@@ -4,6 +4,7 @@ import RootLayout from "./Components/RootLayout";
 import SignUp from "./Components/SignUp";
 import SignIn from "./Components/SignIn";
 import { action as signUpAction } from "./Components/SignUp";
+import { action as customerPageAction } from "./Components/CustomerPage";
 import "./App.css";
 import CustomerPage from "./Components/CustomerPage";
 export default function App() {
@@ -19,11 +20,12 @@ export default function App() {
         },
         {
           path: "/sign-in",
-          element: <SignIn />
+          element: <SignIn />,
         },
         {
           path: "/customer-page",
-          element: <CustomerPage />
+          element: <CustomerPage />,
+          action: customerPageAction,
         },
       ],
     },
