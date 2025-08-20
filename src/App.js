@@ -17,6 +17,14 @@ export default function App() {
           element: <SignUp />,
           action: signUpAction,
         },
+        {
+          path: "/sign-in",
+          element: <SignIn />
+        },
+        {
+          path: "/customer-page",
+          element: <CustomerPage />
+        },
       ],
     },
   ]);
